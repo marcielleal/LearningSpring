@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<title>Show Task</title>
+	</head>
+	<body>
+		<div layout:fragment="content">
+			<h1>Show Task</h1>
+			<hr />
+			<div class="form-group"> 
+				<label for="name">Name: </label>  
+				<span th:text="${task.name}"></span> 
+			</div> 
+			<a th:href="@{/tasks}" class="btn btn-primary" >Back to list Task</a> 
+			<a th:href="@{/tasks/{id}/edit(id = ${task.id})}" class="btn btn-info">Edit this record</a>
+			<a th:href="${task.id +'/delete'}" class="btn btn-danger">Delete this record</a>
+			
+		</div>
+	</body>
+</html>
