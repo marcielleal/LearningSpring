@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>New Task</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:if="${task.id == null}">New Student</h1>
+		<h1 th:if="${task.id != null}">Edit Student</h1>
+		<hr />
+		<form th:action="@{/tasks}"
+			th:method="@{${task.id == null} ? 'post' : 'put'}"
+			th:object="${task}">
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="form-group">
+				<label for="name">Name</label> 
+				<input id="name" name="name" type="text" class="form-control" th:field="*{name}" />
+			</div>
+
+			 <div class="form-group" th:object="${module}">
+				 <select name="module.id" class="form-control">
+					 <option value="">Select module</option>
+			 		 <option th:each="module : ${modules}" th:value="${module.id}" 
+			 		 	th:text="${module.name}" th:selected="${task.id != null ? task.module.id == module.id : false}"></option>
+				</select>	
+			 </div>
+
+			<button type="submit" class="btn btn-success">Save</button>
+			<a th:href="@{/tasks}" class="btn btn-default">Back</a>
+		</form>
+	</div>
+</body>
+</html>

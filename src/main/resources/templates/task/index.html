@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+<head>
+ 	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Task List</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<h1>Task List</h1>
+		<hr />
+		<a th:href="@{/tasks/new}" class="btn btn-success">New Task</a><br/><br/>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Module</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="task : ${listTask}">
+					<td th:text="${task.name}"></td> 
+					<td th:text="${task.module.name}"></td>
+					<td>
+						<a th:href="@{/tasks/{id}(id = ${task.id})}" class="btn btn-primary" >Show</a> 
+				 		<a th:href="@{/tasks/{id}/edit(id = ${task.id})}" class="btn btn-info">Edit</a> 
+				 		<a th:href="${'tasks/'+ task.id +'/delete'}" class="btn btn-danger">Destroy</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	  </div>
+	  
+	  
+</body>
+</html>
